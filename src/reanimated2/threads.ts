@@ -142,14 +142,8 @@ export function runOnUIImmediately<A extends any[], R>(
 }
 
 if (__DEV__) {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    runOnUI(() => {});
-  } catch (e) {
-    throw new Error(
-      'Failed to create a worklet. Did you forget to add Reanimated Babel plugin in babel.config.js? See installation docs at https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation#babel-plugin.'
-    );
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  runOnUI(() => {});
 }
 
 export function runOnJS<A extends any[], R>(
