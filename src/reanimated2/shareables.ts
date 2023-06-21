@@ -168,6 +168,17 @@ export function makeShareableCloneRecursive<T>(
             depth + 1
           );
         }
+      } else if (value instanceof RegExp) {
+        const string = value.toString();
+        const handle = makeShareableCloneRecursive({
+          __init: () => {
+            'worklet';
+            return new RegExp(string);
+          }
+        });
+        registerShareableMapping(value, handle);
+      } else if (value instanceof Float32Array) {
+        console.error('Float32Array not supported');
       } else {
         // This is reached for object types that are not of plain Object.prototype.
         // We don't support such objects from being transferred as shareables to
