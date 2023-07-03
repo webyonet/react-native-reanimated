@@ -12,10 +12,10 @@ export interface StyleProps extends ViewStyle, TextStyle {
   [key: string]: any;
 }
 
-type UnionToIntersection<Union> = (
+type UnionToInterface<Union> = (
   Union extends any ? (k: Union) => void : never
-) extends (k: infer Intersection) => void
-  ? Intersection
+) extends (k: infer Interface) => void
+  ? Interface
   : never;
 
 type KeysOfPropertiesWithGivenValue<ObjectT, ExpectedValue> = {
@@ -23,12 +23,12 @@ type KeysOfPropertiesWithGivenValue<ObjectT, ExpectedValue> = {
 }[keyof ObjectT];
 
 export type NumericTransformKeys = KeysOfPropertiesWithGivenValue<
-  UnionToIntersection<TransformProperty>,
+  UnionToInterface<TransformProperty>,
   number
 >;
 
 export type StringTransformKeys = KeysOfPropertiesWithGivenValue<
-  UnionToIntersection<TransformProperty>,
+  UnionToInterface<TransformProperty>,
   string
 >;
 
@@ -39,7 +39,7 @@ export interface AnimatedStyle
     | Record<'matrix', number[] | AnimationObject>
     | Partial<Record<NumericTransformKeys, number | AnimationObject>>
     | Partial<Record<StringTransformKeys, string | AnimationObject>>
-    | Record<string, AnimationObject>
+    // | Record<string, AnimationObject>
   >;
 }
 
